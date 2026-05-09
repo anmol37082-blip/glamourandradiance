@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Glamour & Radiance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: #fff; color: #333; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ========== HEADER (Same as Landing Page) ========== */
+        header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.97); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000; padding: 12px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #c0392b; letter-spacing: 1px; white-space: nowrap; }
+        .logo span { color: #e67e22; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; z-index: 1001; }
+        .hamburger span { width: 25px; height: 2.5px; background: #333; border-radius: 3px; transition: all 0.3s ease; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { text-decoration: none; color: #555; font-weight: 500; font-size: 14px; transition: color 0.3s; position: relative; }
+        nav ul li a:hover { color: #c0392b; }
+        nav ul li a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #c0392b; transition: width 0.3s; }
+        nav ul li a:hover::after { width: 100%; }
+        .nav-icons { display: flex; gap: 18px; align-items: center; }
+        .nav-icons svg { width: 20px; height: 20px; cursor: pointer; stroke: #555; transition: stroke 0.3s; }
+        .nav-icons svg:hover { stroke: #c0392b; }
+
+        /* ========== MOBILE NAV ========== */
+        .mobile-nav { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: #fff; z-index: 999; padding: 80px 30px 30px; transition: right 0.4s ease; box-shadow: -5px 0 30px rgba(0,0,0,0.1); }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav ul { list-style: none; }
+        .mobile-nav ul li { margin-bottom: 5px; border-bottom: 1px solid #f0f0f0; }
+        .mobile-nav ul li a { text-decoration: none; color: #333; font-size: 18px; font-weight: 500; display: block; padding: 15px 0; transition: color 0.3s; }
+        .mobile-nav ul li a:hover { color: #c0392b; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        /* ========== PAGE HEADER ========== */
+        .page-header { margin-top: 58px; background: #fdf5f0; padding: 60px 20px; text-align: center; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: #333; margin-bottom: 10px; }
+        .page-header p { color: #777; font-size: 15px; }
+        .breadcrumb { display: flex; justify-content: center; gap: 8px; margin-top: 15px; font-size: 13px; color: #999; }
+        .breadcrumb a { color: #c0392b; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ========== ABOUT HERO ========== */
+        .about-hero { padding: 80px 20px; background: #fff; }
+        .about-hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-hero-img { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .about-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-hero-content h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #333; margin-bottom: 20px; line-height: 1.2; }
+        .about-hero-content h2 span { color: #c0392b; }
+        .about-hero-content p { font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 18px; }
+        .about-signature { margin-top: 30px; }
+        .about-signature h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: #333; }
+        .about-signature p { font-size: 13px; color: #999; margin-top: 3px; }
+
+        /* ========== MISSION SECTION ========== */
+        .mission-section { padding: 80px 20px; background: linear-gradient(135deg, #fdf5f0 0%, #fff 100%); }
+        .mission-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .mission-content h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #333; margin-bottom: 20px; }
+        .mission-content h2 span { color: #c0392b; }
+        .mission-content p { font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 18px; }
+        .mission-values { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .mission-value { display: flex; align-items: flex-start; gap: 12px; }
+        .mission-value-icon { width: 45px; height: 45px; min-width: 45px; background: #c0392b; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+        .mission-value h4 { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px; }
+        .mission-value p { font-size: 13px; color: #777; margin: 0; }
+        .mission-img { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .mission-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ========== TEAM SECTION ========== */
+        .team-section { padding: 80px 20px; background: #fff; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 38px; color: #333; margin-bottom: 12px; }
+        .section-header p { color: #777; font-size: 15px; max-width: 500px; margin: 0 auto; }
+        .section-line { width: 50px; height: 3px; background: #c0392b; margin: 18px auto 0; border-radius: 3px; }
+        .team-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .team-card { text-align: center; }
+        .team-img-wrapper { width: 180px; height: 180px; margin: 0 auto 20px; border-radius: 50%; overflow: hidden; border: 4px solid #fdf5f0; }
+        .team-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .team-card h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: #333; margin-bottom: 5px; }
+        .team-card p { font-size: 13px; color: #c0392b; font-weight: 500; margin-bottom: 12px; }
+        .team-social { display: flex; justify-content: center; gap: 10px; }
+        .team-social a { width: 35px; height: 35px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #555; transition: all 0.3s; }
+        .team-social a:hover { background: #c0392b; color: white; }
+
+        /* ========== WHY CHOOSE US ========== */
+        .why-section { padding: 80px 20px; background: linear-gradient(135deg, #fdf5f0 0%, #fff 100%); }
+        .why-container { max-width: 1200px; margin: 0 auto; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .why-card { background: #fff; padding: 40px 30px; border-radius: 18px; box-shadow: 0 5px 30px rgba(0,0,0,0.05); text-align: center; transition: all 0.4s ease; }
+        .why-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .why-icon { width: 70px; height: 70px; background: #c0392b; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 28px; }
+        .why-card h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: #333; margin-bottom: 12px; }
+        .why-card p { font-size: 14px; color: #777; line-height: 1.7; }
+
+        /* ========== FOOTER ========== */
+        footer { background: #1a1a1a; color: #aaa; padding: 70px 0 25px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-brand .logo { color: #fff; margin-bottom: 18px; display: inline-block; font-size: 22px; }
+        .footer-brand p { font-size: 13px; line-height: 1.8; margin-bottom: 22px; color: #999; }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a { width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .social-links a:hover { background: #c0392b; transform: translateY(-3px); }
+        .footer-col h4 { color: #fff; font-size: 16px; font-weight: 600; margin-bottom: 22px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #aaa; text-decoration: none; font-size: 13px; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: #c0392b; }
+        .footer-bottom { max-width: 1200px; margin: 45px auto 0; padding: 22px 20px 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-bottom p { font-size: 12px; color: #777; }
+        .payment-icons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .payment-icons span { background: rgba(255,255,255,0.08); padding: 6px 12px; border-radius: 4px; font-size: 11px; color: #999; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .about-hero-container { grid-template-columns: 1fr; gap: 40px; }
+            .mission-container { grid-template-columns: 1fr; gap: 40px; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 35px; }
+            .page-header h1 { font-size: 36px; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            nav.desktop-nav { display: none; }
+            .logo { font-size: 20px; }
+            .page-header { padding: 40px 16px; }
+            .page-header h1 { font-size: 28px; }
+            .about-hero { padding: 50px 16px; }
+            .about-hero-content h2 { font-size: 28px; }
+            .mission-section { padding: 50px 16px; }
+            .mission-content h2 { font-size: 28px; }
+            .mission-values { grid-template-columns: 1fr; }
+            .team-section { padding: 50px 16px; }
+            .team-grid { grid-template-columns: 1fr; gap: 30px; }
+            .team-img-wrapper { width: 150px; height: 150px; }
+            .why-section { padding: 50px 16px; }
+            .why-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .social-links { justify-content: center; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+            .payment-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Glamour <span>&</span> Radiance</a>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Products</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div style="display:flex;align-items:center;gap:15px;">
+                <div class="nav-icons">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M19 21v-2a4 4 0 0 1-4-4H9a4 4 0 0 1-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+            <li><a href="shop.html" onclick="toggleMenu()">Products</a></li>
+            <li><a href="testimonials.html" onclick="toggleMenu()">Testimonials</a></li>
+            <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <section class="page-header">
+        <h1>About Us</h1>
+        <p>Discover the story behind Glamour & Radiance and our passion for beauty</p>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> <span>/</span> <span>About</span>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT HERO ========== -->
+    <section class="about-hero">
+        <div class="about-hero-container">
+            <div class="about-hero-img">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Glamour & Radiance Story">
+            </div>
+            <div class="about-hero-content">
+                <h2>Our Story Begins With a <span>Dream</span></h2>
+                <p>Founded in 2018, Glamour & Radiance started as a small passion project in a tiny New York apartment. Our founder, Sophia Anderson, believed that everyone deserves access to high-quality, natural beauty products that actually work.</p>
+                <p>What began with just three handcrafted serums has now grown into a global brand trusted by over 100,000 customers worldwide. We remain committed to our founding principles: premium quality, natural ingredients, and affordable luxury.</p>
+                <p>Every product in our collection is carefully formulated with the finest botanical extracts, vitamins, and minerals. We never compromise on quality, and we never test on animals.</p>
+                <div class="about-signature">
+                    <h4>Sophia Anderson</h4>
+                    <p>Founder & CEO, Glamour & Radiance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MISSION SECTION ========== -->
+    <section class="mission-section">
+        <div class="mission-container">
+            <div class="mission-content">
+                <h2>Our <span>Mission</span> & Values</h2>
+                <p>At Glamour & Radiance, we believe that true beauty comes from within. Our mission is to help every person discover their natural radiance through products that nourish, protect, and enhance their skin.</p>
+                <p>We are committed to sustainability, ethical sourcing, and transparency. Every ingredient we use is carefully selected for its efficacy and safety, ensuring that our customers receive only the best.</p>
+                <div class="mission-values">
+                    <div class="mission-value">
+                        <div class="mission-value-icon">&#127807;</div>
+                        <div>
+                            <h4>100% Natural</h4>
+                            <p>Pure botanical ingredients</p>
+                        </div>
+                    </div>
+                    <div class="mission-value">
+                        <div class="mission-value-icon">&#128008;</div>
+                        <div>
+                            <h4>Cruelty Free</h4>
+                            <p>Never tested on animals</p>
+                        </div>
+                    </div>
+                    <div class="mission-value">
+                        <div class="mission-value-icon">&#9851;</div>
+                        <div>
+                            <h4>Eco Friendly</h4>
+                            <p>Sustainable packaging</p>
+                        </div>
+                    </div>
+                    <div class="mission-value">
+                        <div class="mission-value-icon">&#128170;</div>
+                        <div>
+                            <h4>Clinically Proven</h4>
+                            <p>Dermatologist tested</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mission-img">
+                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80" alt="Our Mission">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TEAM SECTION ========== -->
+    <section class="team-section">
+        <div class="section-header">
+            <h2>Meet Our Team</h2>
+            <p>The passionate people behind Glamour & Radiance</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="Sophia Anderson">
+                </div>
+                <h4>Sophia Anderson</h4>
+                <p>Founder & CEO</p>
+                <div class="team-social">
+                    <a href="#">in</a>
+                    <a href="#">t</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="James Mitchell">
+                </div>
+                <h4>James Mitchell</h4>
+                <p>Head of Product Development</p>
+                <div class="team-social">
+                    <a href="#">in</a>
+                    <a href="#">t</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" alt="Emily Chen">
+                </div>
+                <h4>Emily Chen</h4>
+                <p>Lead Dermatologist</p>
+                <div class="team-social">
+                    <a href="#">in</a>
+                    <a href="#">t</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="Olivia Martinez">
+                </div>
+                <h4>Olivia Martinez</h4>
+                <p>Creative Director</p>
+                <div class="team-social">
+                    <a href="#">in</a>
+                    <a href="#">t</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY CHOOSE US ========== -->
+    <section class="why-section">
+        <div class="why-container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>What makes Glamour & Radiance different from the rest</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">&#127807;</div>
+                    <h4>Premium Ingredients</h4>
+                    <p>We source only the finest natural ingredients from trusted suppliers around the world. Every ingredient is carefully selected for maximum efficacy.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">&#128300;</div>
+                    <h4>Science Backed</h4>
+                    <p>Our formulations are developed by leading dermatologists and backed by clinical research. We combine nature with science for optimal results.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">&#128150;</div>
+                    <h4>Made With Love</h4>
+                    <p>Every product is crafted with care and attention to detail. We pour our passion into every bottle, ensuring you receive the best quality possible.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">&#9851;</div>
+                    <h4>Sustainable</h4>
+                    <p>We are committed to reducing our environmental footprint. Our packaging is eco-friendly and we support sustainable farming practices.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">&#128008;</div>
+                    <h4>Cruelty Free</h4>
+                    <p>We never test on animals and are proud to be Leaping Bunny certified. Beauty should never come at the cost of another being's welfare.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">&#128222;</div>
+                    <h4>24/7 Support</h4>
+                    <p>Our dedicated customer care team is always here to help. Whether you have questions or need advice, we're just a message away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">Glamour <span>&</span> Radiance</div>
+                <p>Your trusted destination for premium beauty and skincare products. We believe every person deserves to feel confident and radiant.</p>
+                <div class="social-links">
+                    <a href="#">f</a>
+                    <a href="#">t</a>
+                    <a href="#">in</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">support@glamourradiance.com</a></li>
+                    <li><a href="#">+1 (800) 123-4567</a></li>
+                    <li><a href="#">New York, NY 10001</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Glamour & Radiance. All rights reserved.</p>
+            <div class="payment-icons">
+                <span>Visa</span>
+                <span>MasterCard</span>
+                <span>PayPal</span>
+                <span>Amex</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileNav').classList.contains('active') ? 'hidden' : '';
+        }
+    </script>
+
+</body>
+</html>
