@@ -12,7 +12,7 @@
         img { max-width: 100%; height: auto; display: block; }
         a { text-decoration: none; color: inherit; }
 
-        /* ========== HEADER ========== */
+        /* ========== HEADER (Same as Landing Page) ========== */
         header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.97); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000; padding: 12px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #c0392b; letter-spacing: 1px; white-space: nowrap; }
@@ -136,17 +136,19 @@
             .product-info { padding: 14px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
+    <!-- ========== HEADER (Same as Landing Page) ========== -->
     <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Glamour <span>&</span> Radiance</a>
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.html">Products</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -171,7 +173,8 @@
     <div class="mobile-nav" id="mobileNav">
         <ul>
             <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
-            <li><a href="shop.html" onclick="toggleMenu()">Shop</a></li>
+            <li><a href="shop.html" onclick="toggleMenu()">Products</a></li>
+            <li><a href="index.html#testimonials" onclick="toggleMenu()">Testimonials</a></li>
             <li><a href="about.html" onclick="toggleMenu()">About</a></li>
             <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
         </ul>
